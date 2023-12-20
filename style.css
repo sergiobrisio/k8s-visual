@@ -18,6 +18,11 @@
     position: absolute;
 }
 
+.k8s-pod {
+    /* Styles for pod visualization */
+    margin-left: 20px; /* Indent pods under deployment */
+}
+
 .connection-line {
     position: absolute;
     border-top: 2px dotted red;
