@@ -3,3 +3,22 @@
     border: 1px solid #ddd;
     padding: 10px;
 }
+#architecture {
+    position: relative;
+    min-height: 200px;
+    border: 1px solid #ddd;
+    padding: 10px;
+}
+
+.k8s-object {
+    border: 1px solid #666;
+    padding: 5px;
+    margin: 5px;
+    background-color: #f9f9f9;
+    position: absolute;
+}
+
+.connection-line {
+    position: absolute;
+    border-top: 2px dotted red;
+}
