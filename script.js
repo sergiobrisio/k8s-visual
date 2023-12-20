@@ -1,7 +1,7 @@
 document.getElementById('fileInput').addEventListener('change', function(event) {
     const reader = new FileReader();
     reader.onload = function() {
-        const allYamlDocs = reader.result.split(/---\s*/); // Split the file content by '---'
+        const allYamlDocs = reader.result.split(/\n---\s*\n/); // Improved splitting logic
         allYamlDocs.forEach(yamlDoc => {
             if (yamlDoc.trim()) {
                 try {
