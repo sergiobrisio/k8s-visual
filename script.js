@@ -1,24 +1,26 @@
 document.getElementById('fileInput').addEventListener('change', function(event) {
     const reader = new FileReader();
     reader.onload = function() {
-        try {
-            const yamlData = jsyaml.load(reader.result);
-            visualizeK8sObjects(yamlData);
-        } catch (e) {
-            console.error(e);
-            alert("Error parsing YAML file.");
-        }
+        const allYamlDocs = reader.result.split(/---\s*/); // Split the file content by '---'
+        allYamlDocs.forEach(yamlDoc => {
+            if (yamlDoc.trim()) {
+                try {
+                    const yamlData = jsyaml.load(yamlDoc);
+                    visualizeK8sObjects(yamlData);
+                } catch (e) {
+                    console.error(e);
+                    alert("Error parsing YAML document.");
+                }
+            }
+        });
     };
     reader.readAsText(event.target.files[0]);
 });
 
 function visualizeK8sObjects(data) {
     const architectureDiv = document.getElementById('architecture');
-    architectureDiv.innerHTML = ''; // Clear previous visualization
-
-    if (Array.isArray(data)) {
-        data.forEach(doc => processK8sObject(doc, architectureDiv));
-    } else {
+    // Process each YAML document
+    if (data) {
         processK8sObject(data, architectureDiv);
     }
     drawDependencies(architectureDiv);
